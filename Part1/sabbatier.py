@@ -34,6 +34,10 @@ cv2.imshow('Gray', gray_image)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
 
+# Save images
+cv2.imwrite('Original.jpg', image)
+cv2.imwrite('GrayScaleImg.jpg', gray_image)
+
 # Solarize using thresValue = 64
 solarized_img64 = solarize(gray_image, 64)
 
@@ -50,6 +54,11 @@ cv2.namedWindow('Solarized image [128]',cv2.WINDOW_NORMAL)
 cv2.imshow('Solarized image [128]', solarized_img128)
 cv2.namedWindow('Solarized image [192]',cv2.WINDOW_NORMAL)
 cv2.imshow('Solarized image [192]', solarized_img192)
+
+#Save images
+cv2.imwrite('Solarized64.jpg', solarized_img64)
+cv2.imwrite('Solarized128.jpg', solarized_img128)
+cv2.imwrite('Solarized192.jpg', solarized_img192)
 
 # Wait for any key, destroy all windows
 cv2.waitKey(0)
