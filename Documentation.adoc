@@ -1,0 +1,97 @@
+= Ψηφιακή Επεξεργασία Εικόνας - Εργασία 1
+Ρούσου Αντρέι <cs171075@uniwa.gr>
+:toc: middle
+:toc-title: Πίνακας Περιεχομένων
+:imagesdir: images
+:source-highlighter: pygments
+
+== Εισαγωγή
+
+Η εργασία έγινε στα πλαίσια του μαθήματος Ψηφιακή Επεξεργασία Εικόνας κατά το ακαδημαικό έτος 2021-2022 και αποτελείται από δύο μέρη συνολικ
+
+Στο πρώτο μέρος, στο πρώτο ερώτημα, γίνεται η ανάπτυξη μιας συνάρτησης, η οποία παίρνει δύο ορίσματα, την αρχική μας είκονα  και μια τιμή από 0 εώς 255. Η συνάρτηση μας με όνομα solarize κάνει ένα απλό pseudo-solarization, δηλαδή δίνοντας μια τιμή και την αρχική μας  εικόνα, όλα τα pixel της εικόνας με τιμή μεγαλύτερη ή ίση με το κατώφλι θα διατηρήσουν την τιμή που είχαν αρχικά, ενώ τα pixels με τιμή μικρότερη του κατωφλιού, θα αντικατασταθούν από pixel με τιμή το συμπλήρωμα του αρχικού, δηλαδή (255 - αρχική τιμή pixel). Αφού αναπτύξουμε την ζητούμενη συνάρτηση, ακολουθούν δυο ερωτήματα δοκιμής και αναπαράστασης των αποτελεσμάτων. 
+
+Το δεύτερο ερώτημα αποτελείται από 3 δοκιμές της λειτουργίας της συνάρτησης μας δίνοντας ως κατώφλι τις τιμές 64, 128, 192. Πριν τις δοκιμές φυσικά η εικόνα μετατρέπεται σε grayscale ώστε να μήν έχουμε περισσότερα κανάλια χρώματος, αλλά μόνο το γκρι. Θα έχουμε ουσιαστικά μια ασπρόμαυρη εικόνα. Στην συνέχεια πάνω στην εικόνα μας, θα γίνει η δοκιμή με τις τιμές που δόθηκαν. 
+
+Τέλος στο τρίτο και τελευταίο ερώτημα, θα γίνει η εμφάνιση και η αποθήκευση των αποτελεσμάτων μας.
+
+== Μέρος Πρώτο
+
+Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.
+
+=== Μεθοδολογία
+
+Για το ζητούμενο του πρώτου ερωτήματος έγινε η ανάπτυξη του παρακάτω κώδικα:
+
+.sabbatier.py
+[source,python]
+--
+import cv2
+import numpy as np
+
+
+# Solarize function
+def solarize(originalImage, thresValue):
+    # Create solarized image, same resolution as original, all pixels value 0 of type uint8 (0-255)
+    solarized_image = np.zeros(originalImage.shape, np.uint8)
+    # shape returns a tuple of the number of rows, columns, and channels (if the image is color)
+    # Select each pixel of the original image
+    for colIdx in range(originalImage.shape[0]):
+        for rowIdx in range(originalImage.shape[1]):
+            # Check how the value of each pixel compares to our threshold value
+            if originalImage[colIdx][rowIdx] >= thresValue:
+                solarized_image[colIdx][rowIdx] = originalImage[colIdx][rowIdx]
+            elif originalImage[colIdx][rowIdx] < thresValue:
+                solarized_image[colIdx][rowIdx] = 255 - originalImage[colIdx][rowIdx]
+    return solarized_image
+
+
+# Read image
+image = cv2.imread('VilleneuveMonaco1979.jpg')
+
+# Convert from BGR to gray scale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Show original and  gray scale image
+cv2.namedWindow('Orig',cv2.WINDOW_NORMAL)
+cv2.imshow('Orig', image)
+cv2.namedWindow('Gray',cv2.WINDOW_NORMAL)
+cv2.imshow('Gray', gray_image)
+
+# Wait for any key, destroy all windows
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+# Save images
+cv2.imwrite('Original.jpg', image)
+cv2.imwrite('GrayScaleImg.jpg', gray_image)
+
+# Solarize using thresValue = 64
+solarized_img64 = solarize(gray_image, 64)
+
+# Solarize using thresValue = 128
+solarized_img128 = solarize(gray_image, 128)
+
+# Solarize using thresValue = 192
+solarized_img192 = solarize(gray_image, 192)
+
+# Show solarized images
+cv2.namedWindow('Solarized image [64]',cv2.WINDOW_NORMAL)
+cv2.imshow('Solarized image [64]', solarized_img64)
+cv2.namedWindow('Solarized image [128]',cv2.WINDOW_NORMAL)
+cv2.imshow('Solarized image [128]', solarized_img128)
+cv2.namedWindow('Solarized image [192]',cv2.WINDOW_NORMAL)
+cv2.imshow('Solarized image [192]', solarized_img192)
+
+#Save images
+cv2.imwrite('Solarized64.jpg', solarized_img64)
+cv2.imwrite('Solarized128.jpg', solarized_img128)
+cv2.imwrite('Solarized192.jpg', solarized_img192)
+
+# Wait for any key, destroy all windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+--
+
+== Μέρος Δεύτερο
+
