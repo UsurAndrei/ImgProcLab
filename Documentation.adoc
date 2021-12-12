@@ -1,8 +1,8 @@
 = Ψηφιακή Επεξεργασία Εικόνας - Εργασία 1
 Ρούσου Αντρέι <cs171075@uniwa.gr>
+:imagesdir: images
 :toc: middle
 :toc-title: Πίνακας Περιεχομένων
-:imagesdir: images
 :source-highlighter: pygments
 
 == Εισαγωγή
@@ -15,11 +15,11 @@
 
 Τέλος στο τρίτο και τελευταίο ερώτημα, θα γίνει η εμφάνιση και η αποθήκευση των αποτελεσμάτων μας.
 
-== Μέρος Πρώτο
+== Μεθοδολογία - Μέρος Πρώτο
 
 Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.
 
-=== Μεθοδολογία
+=== Κώδικας
 
 Για το ζητούμενο του πρώτου ερωτήματος έγινε η ανάπτυξη του παρακάτω κώδικα:
 
@@ -92,6 +92,45 @@ cv2.imwrite('Solarized192.jpg', solarized_img192)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 --
+
+
+=== Ζητούμενο 1
+
+Η συνάρτηση που ζητήθηκε για το πρώτο ερώτημα είναι η παρακάτω:
+
+[source, python]
+--
+# Solarize function
+def solarize(originalImage, thresValue):
+    # Create solarized image, same resolution as original, all pixels value 0 of type uint8 (0-255)
+    solarized_image = np.zeros(originalImage.shape, np.uint8)
+    # shape returns a tuple of the number of rows, columns, and channels (if the image is color)
+    # Select each pixel of the original image
+    for colIdx in range(originalImage.shape[0]):
+        for rowIdx in range(originalImage.shape[1]):
+            # Check how the value of each pixel compares to our threshold value
+            if originalImage[colIdx][rowIdx] >= thresValue:
+                solarized_image[colIdx][rowIdx] = originalImage[colIdx][rowIdx]
+            elif originalImage[colIdx][rowIdx] < thresValue:
+                solarized_image[colIdx][rowIdx] = 255 - originalImage[colIdx][rowIdx]
+    return solarized_image
+--
+
+Η συνάρτηση μας δέχεται δύο ορίσματα, όπως αυτά ζητήθηκαν, την αρχική μας εικόνα και μια τιμή thresValue. Κατά την εκτέλεση της συνάρτησης μας, δημιουργούμε μια εικόνα με όνομα solarized_image, η οποία θα αποτελεί την εικόνα που θα επιστρέψει η συνάρτηση μας.
+Η αρχικοποίηση της εικόνας μας, γίνεται με μηδενικά bit με την χρήση της συνάρτησης https://numpy.org/doc/stable/reference/generated/numpy.zeros.html[zeros] της βιβλιοθήκης https://numpy.org/[numpy], 
+αρχικοποιόντας έτσι την εικόνα μας, με μηδενικά bit, σε ίδιο μέγεθος με την αρχική εικόνα που δίνουμε για όρισμα. Δίνουμε στην συνάρτηση zeros μας και τον τύπο δεδομένων uint8, unsigned integer των 8-bit δηλαδή, εύρως τιμών 0 εώς 255, δηλαδή οι τιμές
+που μπορεί να πάρει ένα pixel. 
+
+Έχει ενδιαφέρον να γίνει μια ανάλυση της συνάρτησης shape. Η συνάρτηση αυτή επιστρέφει ένα tupple με 3 στοιχεία, των αριθμό των γραμμών, των στυλών και τέλος τα κανάλια. Αυτό έχει σημασία διότι με ευκολία μπορούμε με μια for να πάρουμε κάθε γραμμή της εικόνας και με
+μια άλλη for κάθε στύλη, όπως ακριβώς θα κάναμε αν θέλαμε να έχουμε πρόσβαση σε κάθε στοιχείο ενός πίνακα δυο διαστάσεων. 
+
+Αφού λοιπόν μπορούμε να το κάνουμε αυτό, μένει μόνο να συγκρίνουμε την τιμή του κάθε pixel της αρχικής εικόνας με την τιμή που έχουμε δώσει για
+το κατώφλι. Αν είναι μεγαλύτερη, το pixel κρατάει την τιμή που είχε, δηλαδή στην νέα εικόνα μας κάνουμε εκχώρηση της τιμής του pixel της αρχικής εικόνας στο αντίστοιχο pixel της εικόνας που θα επιστρέψει η συνάρτηση μας.
+Αλλίως, αν είναι μικρότερη, εκχωρούμε στο pixel την τιμή (255 - την τιμή του pixel της αρχικής εικόνας), το συμπλήρωμα δηλαδή όπως ζητήθηκε στην εκφώνηση. Τέλος φυσικά αφού έχει γίνει ο έλεγχος σε κάθε pixel, η συνάρτηση μας επιστρέψει την solarized εικόνα μας.
+
+
+
+
 
 == Μέρος Δεύτερο
 
