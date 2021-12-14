@@ -4,8 +4,11 @@
 :toc: middle
 :toc-title: Πίνακας Περιεχομένων
 :source-highlighter: pygments
+:figure-caption: Image 
 
 :cvturl: https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab
+:urlnamedwindow: https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b
+:urlimshow: https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563
 
 == Εισαγωγή
 
@@ -177,8 +180,10 @@ solarized_img128 = solarize(gray_image, 128)
 solarized_img192 = solarize(gray_image, 192)
 --
 
-Πλέον έχουμε τρεις μεταβλητές, solarized_img64, solarized_img128 και solarized_img192 που περιέχουν την πληροφορία για τρεις εικόνες, αποτέλεσμα την κλήσης της συνάρτησης μας με κατώφλι 64, 128 και 192 αντίστοιχα. Κατά την κλήση, δίνουμε
+Πλέον έχουμε τρεις μεταβλητές, solarized_img64, solarized_img128 και solarized_img192 που περιέχουν την πληροφορία για τρεις solarized εικόνες μας, αποτέλεσμα την κλήσης της συνάρτησης μας με κατώφλι 64, 128 και 192 αντίστοιχα. Κατά την κλήση, δίνουμε
 όπως αναφέραμε και πριν, την αρχική μας εικόνα (σε grayscale) και το κατώφλι για ορίσματα.
+
+=== Ζητούμενο 3
 
 Απομένει λοιπόν η εμφάνηση των αποτελεσμάτων, η οποία γίνεται στις παρακάτω γραμμές:
 
@@ -193,12 +198,56 @@ cv2.namedWindow('Solarized image [192]',cv2.WINDOW_NORMAL)
 cv2.imshow('Solarized image [192]', solarized_img192)
 --
 
-Για την εμφάνιση δημιουργούμε ένα παράθυρο με την συνάρτηση https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b[namedWindow] της βιβλιοθήκης OpenCV, δίνοντας για όρισμα το όνομα που θέλουμε για το παράθυρο και ένα flag, στην περίπτωση μας το WINDOW_NORMAL που αντιστοιχεί σε παράθυρο του οποίου μπορούμε να αλλάξουμε το μέγεθος. Η διαδικάσια γίνεται τρεις φορές για κάθε παράθυρο.
-Μετά από την δημιουργία του παραθύρου, με την χρήση της συνάρτησης https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563[imshow] της βιβλιοθήκης OpenCV, δίνοντας για ορίσματα το όνομα του παραθύρου που δημιουργήσαμε σε κάθε περίπτωση προηγουμένως και την είκονα. Η ίδια διαδικασία γίνεται τρεις φορές για κάθε εικόνα που έχουμε στο παράδειγμα μας.
+Για την εμφάνιση δημιουργούμε ένα παράθυρο με την συνάρτηση {urlnamedwindow}[namedWindow] της βιβλιοθήκης OpenCV, δίνοντας για όρισμα το όνομα που θέλουμε για το παράθυρο και ένα flag, στην περίπτωση μας το WINDOW_NORMAL που αντιστοιχεί σε παράθυρο του οποίου μπορούμε να αλλάξουμε το μέγεθος. Η διαδικάσια γίνεται τρεις φορές για κάθε παράθυρο.
+Μετά από την δημιουργία του παραθύρου, με την χρήση της συνάρτησης {urlimshow}[imshow] της βιβλιοθήκης OpenCV, δίνοντας για ορίσματα το όνομα του παραθύρου που δημιουργήσαμε σε κάθε περίπτωση προηγουμένως και την είκονα. Η ίδια διαδικασία γίνεται τρεις φορές για κάθε εικόνα που έχουμε στο παράδειγμα μας.
 
-=== Ζητούμενο 3
+Για σύγκριση, αν και δεν υπάρχει στα ζητούμενα, εμφανίζουμε και την original εικόνα, στην αρχική μορφή και σε grayscale με αντίστοιχο τρόπο στις παρακάτω γραμμές:
 
+[source, python]
+--
+# Show original and  gray scale image
+cv2.namedWindow('Orig',cv2.WINDOW_NORMAL)
+cv2.imshow('Orig', image)
+cv2.namedWindow('Gray',cv2.WINDOW_NORMAL)
+cv2.imshow('Gray', gray_image)
+--
 
+Παρακάτω τα αποτελέσματα που λαμβάνουμε:
+
+.Original Image
+image::Original.jpg[]
+
+.GrayScale Image
+image::GrayScaleImg.jpg[]
+
+.Solarized Image (64)
+image::Solarized64.jpg[]
+
+.Solarized Image (128)
+image::Solarized128.jpg[]
+
+.Solarized Image (192)
+image::Solarized192.jpg[]
+
+Σε κάθε περίπτωση η αποθήκευση της κάθε εικόνας γίνεται με την χρήση της συνάρτησης {urlimwrite}[imwrite] της βιβλιοθήκης OpenCV. Η συνάρτηση δέχεται σαν όρισμα το όνομα της εικόνας που θα έχει το αρχείο και την μεταβλητή της εικόνας μας.
+Η αποθήκευση γίνεται μια φορά για την original και την grayscale και ας μην ζητήθηκε αλλά φυσικά και στα αποτελέσματα μας όπως βλέπουμε στις παρακάτω γραμμές:
+
+[source, python]
+--
+# Save images
+cv2.imwrite('Original.jpg', image)
+cv2.imwrite('GrayScaleImg.jpg', gray_image)
+--
+
+[source, python]
+--
+#Save images
+cv2.imwrite('Solarized64.jpg', solarized_img64)
+cv2.imwrite('Solarized128.jpg', solarized_img128)
+cv2.imwrite('Solarized192.jpg', solarized_img192)
+--
+
+Θα πρέπει μετά την εκτέλεση των παραπάνω γραμμών να υπάρχουν οι εικόνες ως αρχεία στον δίσκο μας.
 
 == Μέρος Δεύτερο
 
