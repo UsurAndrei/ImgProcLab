@@ -1,6 +1,7 @@
 import random
 import cv2
 import numpy as np
+from skimage.metrics import structural_similarity as ssim
 
 # Read image
 image = cv2.imread('Subaru555.jpg')
@@ -35,13 +36,58 @@ cv2.imshow('Salt and Pepper', spnoisy_img)
 
 # Create noise using numpy.random poisson function, type uint8 so pixels get 0-255 values
 noise = np.random.poisson(gray_image).astype(np.uint8)
-poisson_img = gray_image + noise
+# Add noise to initial grayscale image
+poisson_img = (gray_image + noise)
 
 # Show image with Shot noise
 cv2.namedWindow('Shot Noise', cv2.WINDOW_NORMAL)
 cv2.imshow('Shot Noise', poisson_img)
 
+# Use mean filter on images, kernel size 5x5
+meanFilterSP = cv2.blur(spnoisy_img, (5, 5))
+meanFilterPoisson = cv2.blur(poisson_img, (5, 5))
+
+# Use median filter on images, kernel size 5x5
+medianFilterSP = cv2.medianBlur(spnoisy_img, 5)
+medianFilterPoisson = cv2.medianBlur(poisson_img, 5)
+
+# Use gaussian filter on images, kernel size 5x5
+gaussianFilterSP = cv2.GaussianBlur(spnoisy_img, (5, 5), 0, 0)
+gaussianFilterPoisson = cv2.GaussianBlur(poisson_img, (5, 5), 0, 0)
+
+# Show image after mean filter
+cv2.namedWindow('Mean Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Salt & Pepper)', meanFilterSP)
+cv2.namedWindow('Mean Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Shot)', meanFilterPoisson)
+
+# Show image after median filter
+cv2.namedWindow('Median Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Salt & Pepper)', medianFilterSP)
+cv2.namedWindow('Median Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Shot)', medianFilterPoisson)
+
+# Show image after gaussian filter
+cv2.namedWindow('Gaussian Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Salt & Pepper)', gaussianFilterSP)
+cv2.namedWindow('Gaussian Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Shot)', gaussianFilterPoisson)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# Print Similarity Scores
+sim_score, _ = ssim(gray_image, meanFilterSP, full=True)
+print('Salt & Pepper: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
+sim_score, _ = ssim(gray_image, medianFilterSP, full=True)
+print('Salt & Pepper: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
+sim_score, _ = ssim(gray_image, gaussianFilterSP, full=True)
+print('Salt & Pepper: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
+
+sim_score, _ = ssim(gray_image, meanFilterPoisson, full=True)
+print('Shot: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
+sim_score, _ = ssim(gray_image, medianFilterPoisson, full=True)
+print('Shot: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
+sim_score, _ = ssim(gray_image, gaussianFilterPoisson, full=True)
+print('Shot: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
 
