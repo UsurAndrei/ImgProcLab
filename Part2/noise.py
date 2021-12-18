@@ -8,6 +8,9 @@ image = cv2.imread('Subaru555.jpg')
 # Convert from BGR to gray scale
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+cv2.namedWindow('Gray Image', cv2.WINDOW_NORMAL)
+cv2.imshow('Gray Image', gray_image)
+
 # Salt and Pepper with probability 10% (10% white, 10% black)
 spnoisy_img = np.zeros(gray_image.shape, np.uint8)
 
@@ -26,8 +29,18 @@ for colIdx in range(gray_image.shape[0]):
         else:
             spnoisy_img[colIdx][rowIdx] = gray_image[colIdx][rowIdx]
 
+# Show Salt and Pepper noisy image
 cv2.namedWindow('Salt and Pepper',cv2.WINDOW_NORMAL)
 cv2.imshow('Salt and Pepper', spnoisy_img)
+
+# Create noise using numpy.random poisson function, type uint8 so pixels get 0-255 values
+noise = np.random.poisson(gray_image).astype(np.uint8)
+poisson_img = gray_image + noise
+
+# Show image with Shot noise
+cv2.namedWindow('Shot Noise', cv2.WINDOW_NORMAL)
+cv2.imshow('Shot Noise', poisson_img)
+
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
