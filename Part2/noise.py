@@ -12,6 +12,7 @@ gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 cv2.namedWindow('Gray Image', cv2.WINDOW_NORMAL)
 cv2.imshow('Gray Image', gray_image)
+cv2.imwrite('GrayScaleImg.jpg', gray_image)
 
 # Salt and Pepper with probability 10% (10% white, 10% black)
 spnoisy_img = np.zeros(gray_image.shape, np.uint8)
@@ -31,18 +32,20 @@ for colIdx in range(gray_image.shape[0]):
         else:
             spnoisy_img[colIdx][rowIdx] = gray_image[colIdx][rowIdx]
 
-# Show Salt and Pepper noisy image
+# Show Salt and Pepper noisy image, save in same directory
 cv2.namedWindow('Salt and Pepper',cv2.WINDOW_NORMAL)
 cv2.imshow('Salt and Pepper', spnoisy_img)
+cv2.imwrite('SaltAndPepper.jpg', spnoisy_img)
 
 # Create noise using numpy.random poisson function, type uint8 so pixels get 0-255 values
 noise = np.random.poisson(gray_image).astype(np.uint8)
 # Add noise to initial grayscale image
 poisson_img = (gray_image + noise)
 
-# Show image with Shot noise
+# Show image with Shot noise, save in same directory
 cv2.namedWindow('Shot Noise', cv2.WINDOW_NORMAL)
 cv2.imshow('Shot Noise', poisson_img)
+cv2.imwrite('ShotNoise.jpg', poisson_img)
 
 # Use mean filter on images, kernel size 5x5
 meanFilterSP = cv2.blur(spnoisy_img, (5, 5))
@@ -56,23 +59,29 @@ medianFilterPoisson = cv2.medianBlur(poisson_img, 5)
 gaussianFilterSP = cv2.GaussianBlur(spnoisy_img, (5, 5), 0, 0)
 gaussianFilterPoisson = cv2.GaussianBlur(poisson_img, (5, 5), 0, 0)
 
-# Show image after mean filter
+# Show image after mean filter, save in same directory
 cv2.namedWindow('Mean Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
 cv2.imshow('Mean Filter (Salt & Pepper)', meanFilterSP)
+cv2.imwrite('MeanFilteredSP.jpg', meanFilterSP)
 cv2.namedWindow('Mean Filter (Shot)', cv2.WINDOW_NORMAL)
 cv2.imshow('Mean Filter (Shot)', meanFilterPoisson)
+cv2.imwrite('MeanFilteredPoisson.jpg', meanFilterPoisson)
 
-# Show image after median filter
+# Show image after median filter, save in same directory
 cv2.namedWindow('Median Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
 cv2.imshow('Median Filter (Salt & Pepper)', medianFilterSP)
+cv2.imwrite('MedianFilteredSP.jpg', medianFilterSP)
 cv2.namedWindow('Median Filter (Shot)', cv2.WINDOW_NORMAL)
 cv2.imshow('Median Filter (Shot)', medianFilterPoisson)
+cv2.imwrite('MedianFilteredPoisson.jpg', medianFilterPoisson)
 
-# Show image after gaussian filter
+# Show image after gaussian filter, save in same directory
 cv2.namedWindow('Gaussian Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
 cv2.imshow('Gaussian Filter (Salt & Pepper)', gaussianFilterSP)
+cv2.imwrite('GaussianFilteredSP.jpg', gaussianFilterSP)
 cv2.namedWindow('Gaussian Filter (Shot)', cv2.WINDOW_NORMAL)
 cv2.imshow('Gaussian Filter (Shot)', gaussianFilterPoisson)
+cv2.imwrite('GaussianFilteredPoisson.jpg', gaussianFilterPoisson)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
