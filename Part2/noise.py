@@ -2,6 +2,7 @@ import random
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity as ssim
+from skimage.metrics import mean_squared_error
 
 # Read image
 image = cv2.imread('Subaru555.jpg')
@@ -77,17 +78,29 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # Print Similarity Scores
-sim_score, _ = ssim(gray_image, meanFilterSP, full=True)
+sim_score = ssim(gray_image, meanFilterSP)
+mse_score = mean_squared_error(gray_image, meanFilterSP)
 print('Salt & Pepper: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
-sim_score, _ = ssim(gray_image, medianFilterSP, full=True)
+print('Salt & Pepper: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterSP)
+mse_score = mean_squared_error(gray_image, medianFilterSP)
 print('Salt & Pepper: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
-sim_score, _ = ssim(gray_image, gaussianFilterSP, full=True)
+print('Salt & Pepper: Original - Median Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterSP)
+mse_score = mean_squared_error(gray_image, gaussianFilterSP)
 print('Salt & Pepper: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
 
-sim_score, _ = ssim(gray_image, meanFilterPoisson, full=True)
+sim_score = ssim(gray_image, meanFilterPoisson)
+mse_score = mean_squared_error(gray_image, meanFilterPoisson)
 print('Shot: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
-sim_score, _ = ssim(gray_image, medianFilterPoisson, full=True)
+print('Shot: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterPoisson)
+mse_score = mean_squared_error(gray_image, medianFilterPoisson)
 print('Shot: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
-sim_score, _ = ssim(gray_image, gaussianFilterPoisson, full=True)
+print('Shot: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterPoisson)
+mse_score = mean_squared_error(gray_image, gaussianFilterPoisson)
 print('Shot: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
+print('Shot: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
 
