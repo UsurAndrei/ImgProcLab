@@ -112,4 +112,3 @@ sim_score = ssim(gray_image, gaussianFilterPoisson)
 mse_score = mean_squared_error(gray_image, gaussianFilterPoisson)
 print('Shot: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
 print('Shot: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
-
