@@ -47,7 +47,7 @@
 
 === Κώδικας
 
-Για το ζητούμενο του πρώτου ερωτήματος έγινε η ανάπτυξη του παρακάτω κώδικα:
+Για τα ζητούμενα του πρώτου μέρους έγινε η ανάπτυξη του παρακάτω κώδικα:
 
 .sabbatier.py
 [source,python]
@@ -119,8 +119,15 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 --
 
+Στην αρχή του κώδικα κάνουμε import τις βιβλιοθήκες που θα χρειαστούμε, τις https://pypi.org/project/opencv-python/[OpenCV] και https://numpy.org/[NumPY] αντίστοιχα.
 
-=== Ζητούμενο 1
+[source, python]
+--
+import cv2
+import numpy as np
+--
+
+=== Ερώτημα 1
 
 Η συνάρτηση που ζητήθηκε για το πρώτο ερώτημα είναι η παρακάτω:
 
@@ -154,7 +161,7 @@ def solarize(originalImage, thresValue):
 το κατώφλι. Αν είναι μεγαλύτερη, το pixel κρατάει την τιμή που είχε, δηλαδή στην νέα εικόνα μας κάνουμε εκχώρηση της τιμής του pixel της αρχικής εικόνας στο αντίστοιχο pixel της εικόνας που θα επιστρέψει η συνάρτηση μας.
 Αλλίως, αν είναι μικρότερη, εκχωρούμε στο pixel την τιμή (255 - την τιμή του pixel της αρχικής εικόνας), το συμπλήρωμα δηλαδή όπως ζητήθηκε στην εκφώνηση. Τέλος φυσικά αφού έχει γίνει ο έλεγχος σε κάθε pixel, η συνάρτηση μας επιστρέψει την solarized εικόνα μας.
 
-=== Ζητούμενο 2
+=== Ερώτημα 2
 
 Για την εφαρμογή της συνάρτησης μας σε μια εικόνα, ακολουθούμε τα παρακάτω βήματα:
 
@@ -204,7 +211,7 @@ solarized_img192 = solarize(gray_image, 192)
 Πλέον έχουμε τρεις μεταβλητές, solarized_img64, solarized_img128 και solarized_img192 που περιέχουν την πληροφορία για τρεις solarized εικόνες μας, αποτέλεσμα την κλήσης της συνάρτησης μας με κατώφλι 64, 128 και 192 αντίστοιχα. Κατά την κλήση, δίνουμε
 όπως αναφέραμε και πριν, την αρχική μας εικόνα (σε grayscale) και το κατώφλι για ορίσματα.
 
-=== Ζητούμενο 3
+=== Ερώτημα 3
 
 Απομένει λοιπόν η εμφάνηση των αποτελεσμάτων, η οποία γίνεται στις παρακάτω γραμμές:
 
@@ -271,5 +278,161 @@ cv2.imwrite('Solarized192.jpg', solarized_img192)
 Θα πρέπει μετά την εκτέλεση των παραπάνω γραμμών να υπάρχουν οι εικόνες ως αρχεία στον δίσκο μας.
 
 == Μέρος Δεύτερο
+
+Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το δεύτερο μέρος της εργασίας.
+
+=== Κώδικας
+
+Για τα ζητούμενα του δεύτερου μέρους έγινε η ανάπτυξη του παρακάτω κώδικα:
+
+.noise.py
+[source, python]
+--
+import random
+import cv2
+import numpy as np
+from skimage.metrics import structural_similarity as ssim
+from skimage.metrics import mean_squared_error
+
+# Read image
+image = cv2.imread('Subaru555.jpg')
+
+# Convert from BGR to gray scale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+cv2.namedWindow('Gray Image', cv2.WINDOW_NORMAL)
+cv2.imshow('Gray Image', gray_image)
+cv2.imwrite('GrayScaleImg.jpg', gray_image)
+
+# Salt and Pepper with probability 10% (10% white, 10% black)
+spnoisy_img = np.zeros(gray_image.shape, np.uint8)
+
+# Select each pixel of the original image
+for colIdx in range(gray_image.shape[0]):
+    for rowIdx in range(gray_image.shape[1]):
+        # Generate a random number in the semi-open range [0.0 1.0)
+        rand = random.random()
+        # If the number is less than 0.1 (10% possibility), turn the pixel black 0
+        if rand < 0.1:
+            spnoisy_img[colIdx][rowIdx] = 0
+        # Else if the number is greater than 0.9 (10% possibility), turn the pixel white 255
+        elif rand > 0.9:
+            spnoisy_img[colIdx][rowIdx] = 255
+        # Else just keep the original value
+        else:
+            spnoisy_img[colIdx][rowIdx] = gray_image[colIdx][rowIdx]
+
+# Show Salt and Pepper noisy image, save in same directory
+cv2.namedWindow('Salt and Pepper',cv2.WINDOW_NORMAL)
+cv2.imshow('Salt and Pepper', spnoisy_img)
+cv2.imwrite('SaltAndPepper.jpg', spnoisy_img)
+
+# Create noise using numpy.random poisson function, type uint8 so pixels get 0-255 values
+noise = np.random.poisson(gray_image).astype(np.uint8)
+# Add noise to initial grayscale image
+poisson_img = (gray_image + noise)
+
+# Show image with Shot noise, save in same directory
+cv2.namedWindow('Shot Noise', cv2.WINDOW_NORMAL)
+cv2.imshow('Shot Noise', poisson_img)
+cv2.imwrite('ShotNoise.jpg', poisson_img)
+
+# Use mean filter on images, kernel size 5x5
+meanFilterSP = cv2.blur(spnoisy_img, (5, 5))
+meanFilterPoisson = cv2.blur(poisson_img, (5, 5))
+
+# Use median filter on images, kernel size 5x5
+medianFilterSP = cv2.medianBlur(spnoisy_img, 5)
+medianFilterPoisson = cv2.medianBlur(poisson_img, 5)
+
+# Use gaussian filter on images, kernel size 5x5
+gaussianFilterSP = cv2.GaussianBlur(spnoisy_img, (5, 5), 0, 0)
+gaussianFilterPoisson = cv2.GaussianBlur(poisson_img, (5, 5), 0, 0)
+
+# Show image after mean filter, save in same directory
+cv2.namedWindow('Mean Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Salt & Pepper)', meanFilterSP)
+cv2.imwrite('MeanFilteredSP.jpg', meanFilterSP)
+cv2.namedWindow('Mean Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Shot)', meanFilterPoisson)
+cv2.imwrite('MeanFilteredPoisson.jpg', meanFilterPoisson)
+
+# Show image after median filter, save in same directory
+cv2.namedWindow('Median Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Salt & Pepper)', medianFilterSP)
+cv2.imwrite('MedianFilteredSP.jpg', medianFilterSP)
+cv2.namedWindow('Median Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Shot)', medianFilterPoisson)
+cv2.imwrite('MedianFilteredPoisson.jpg', medianFilterPoisson)
+
+# Show image after gaussian filter, save in same directory
+cv2.namedWindow('Gaussian Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Salt & Pepper)', gaussianFilterSP)
+cv2.imwrite('GaussianFilteredSP.jpg', gaussianFilterSP)
+cv2.namedWindow('Gaussian Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Shot)', gaussianFilterPoisson)
+cv2.imwrite('GaussianFilteredPoisson.jpg', gaussianFilterPoisson)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Print Similarity Scores
+sim_score = ssim(gray_image, meanFilterSP)
+mse_score = mean_squared_error(gray_image, meanFilterSP)
+print('Salt & Pepper: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterSP)
+mse_score = mean_squared_error(gray_image, medianFilterSP)
+print('Salt & Pepper: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Median Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterSP)
+mse_score = mean_squared_error(gray_image, gaussianFilterSP)
+print('Salt & Pepper: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
+
+sim_score = ssim(gray_image, meanFilterPoisson)
+mse_score = mean_squared_error(gray_image, meanFilterPoisson)
+print('Shot: Original - Mean Filtered SSID:{:.3f}'.format(sim_score))
+print('Shot: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterPoisson)
+mse_score = mean_squared_error(gray_image, medianFilterPoisson)
+print('Shot: Original - Median Filtered SSID:{:.3f}'.format(sim_score))
+print('Shot: Original - Median Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterPoisson)
+mse_score = mean_squared_error(gray_image, gaussianFilterPoisson)
+print('Shot: Original - Gauss Filtered SSID:{:.3f}'.format(sim_score))
+print('Shot: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
+--
+
+Στην αρχή κάνουμε import τις βιβλιοθήκες που θα χρησιμοποιήσουμε, τις https://pypi.org/project/opencv-python/[OpenCV], https://numpy.org/[NumPY], https://docs.python.org/3/library/random.html[Random] και ορισμένες χρήσιμες συναρτήσεις από τη https://scikit-image.org/[SciKit-Image].
+
+[source, python]
+--
+import random
+import cv2
+import numpy as np
+from skimage.metrics import structural_similarity as ssim
+from skimage.metrics import mean_squared_error
+--
+
+=== Ερώτημα 1
+
+Στο πρώτο ερώτημα μας ζητείται να διαβάσουμε μια εικόνα της επιλογής μας και να τη μετατρέψουμε σε grayscale.
+Θα «ανοίξουμε» την αρχική μας εικόνα με τη χρήση της συνάρτησης https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56[imread] όπως και στο προηγούμενο μέρος της εργασίας.
+Η μετατροπή σε grayscale θα γίνει ξανά με την χρήση της {cvturl}[cvtColor] της βιβλιοθήκης OpenCV αντίστοιχα.
+
+Παρακάτω οι γραμμές κώδικα στις οποίες διαβάζουμε και μετατρέπουμε την εικόνα:
+
+[source, python]
+--
+# Read image
+image = cv2.imread('Subaru555.jpg')
+
+# Convert from BGR to gray scale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+--
+
+=== Ερώτημα 2
+
 
 
