@@ -22,11 +22,11 @@ for colIdx in range(gray_image.shape[0]):
     for rowIdx in range(gray_image.shape[1]):
         # Generate a random number in the semi-open range [0.0 1.0)
         rand = random.random()
-        # If the number is less than 0.1 (10% possibility), turn the pixel black 0
-        if rand < 0.1:
+        # If the number is less than 0.05 (5% possibility), turn the pixel black 0
+        if rand < 0.05:
             spnoisy_img[colIdx][rowIdx] = 0
-        # Else if the number is greater than 0.9 (10% possibility), turn the pixel white 255
-        elif rand > 0.9:
+        # Else if the number is greater than 0.95 (5% possibility), turn the pixel white 255
+        elif rand > 0.95:
             spnoisy_img[colIdx][rowIdx] = 255
         # Else just keep the original value
         else:
