@@ -43,7 +43,7 @@
 
 == Μεθοδολογία - Μέρος Πρώτο
 
-Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.
+Παρακάτω η μεθοδος που ακολουθήσαμε για την απάντηση των ερωτημάτων και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.
 
 === Κώδικας
 
@@ -287,9 +287,9 @@ cv2.imwrite('Solarized192.jpg', solarized_img192)
 
 Θα πρέπει μετά την εκτέλεση των παραπάνω γραμμών να υπάρχουν οι εικόνες ως αρχεία στον δίσκο μας.
 
-== Μέρος Δεύτερο
+== Μεθοδολογία - Μέρος Δεύτερο
 
-Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το δεύτερο μέρος της εργασίας.
+Παρακάτω η μέθοδος που ακολουθήσαμε για την λύση των ερωτημάτων και τα αποτελέσματα που λαμβάνουμε για το δεύτερο μέρος της εργασίας.
 
 === Κώδικας
 
@@ -444,5 +444,34 @@ gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 === Ερώτημα 2
 
-Στο δεύτερο ερώτημα εισάγουμε τον θόρυβο. Για το πρώτο υποερώτημα, αναπτύξαμε τον παρακάτω κώδικα:
+Στο δεύτερο ερώτημα εισάγουμε τους δύο θορύβους.
+
+[Discrete]
+==== Salt & Pepper
+
+Παρακάτω ο κώδικας για την εισαγωγή Salt and Pepper θορύβου 10%:
+
+[source, python]
+--
+# Salt and Pepper with probability 10% (10% white, 10% black)
+spnoisy_img = np.zeros(gray_image.shape, np.uint8)
+
+# Select each pixel of the original image
+for colIdx in range(gray_image.shape[0]):
+    for rowIdx in range(gray_image.shape[1]):
+        # Generate a random number in the semi-open range [0.0 1.0)
+        rand = random.random()
+        # If the number is less than 0.05 (5% possibility), turn the pixel black 0
+        if rand < 0.05:
+            spnoisy_img[colIdx][rowIdx] = 0
+        # Else if the number is greater than 0.95 (5% possibility), turn the pixel white 255
+        elif rand > 0.95:
+            spnoisy_img[colIdx][rowIdx] = 255
+        # Else just keep the original value
+        else:
+            spnoisy_img[colIdx][rowIdx] = gray_image[colIdx][rowIdx]
+--
+
+Αρχίκα αρχικοποιούμε με την συνάρτηση zeros της βιβλιοθήκης np μια εικόνα, όπως αντίστοιχα κάναμε και για το πρώτο μέρος της εργασίας.
+
 
