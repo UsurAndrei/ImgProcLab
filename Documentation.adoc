@@ -10,6 +10,9 @@
 :urlnamedwindow: https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b
 :urlimshow: https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563
 :urlimwrite: https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce
+:urlmeanblur: https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37
+:urlmedianblur: https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga564869aa33e58769b4469101aac458f9
+:urlgaussblur: https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1
 
 == Εισαγωγή
 
@@ -543,5 +546,127 @@ image::ShotNoise.jpg[]
 
 === Ερώτημα 4
 
+[Discrete]
+==== Mean Filter
 
+Το Mean φίλτρο είναι ένα απλό, γρήγορο φίλτρο, με συγκεκριμένο μέγεθος πυρήνα (kernel), τετράγωνο ή άλλου σχήματος το οποίο αντικαθιστά το μεσαίο pixel του φίλτρου με το μέσο όρο των γειτονικών pixel (με την τιμή του ίδιου του pixel να μετράει επίσης).
+Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές:
 
+[source, python]
+--
+# Use mean filter on images, kernel size 5x5
+meanFilterSP = cv2.blur(spnoisy_img, (5, 5))
+meanFilterPoisson = cv2.blur(poisson_img, (5, 5))
+--
+
+Η εφαρμογή γίνεται με την χρήση της {urlmeanblur}[blur] της βιβλιοθήκης OpenCV. Την εφαρμόζουμε μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Τα ορίσματα που δίνουμε είναι η εικόνα μας και το μέγεθος του πυρήνα, στην περίπτωση μας 5x5.
+Η συνάρτηση μας κάθε φορά επιστρέφει μια καινούρια εικόνα, η οποία είναι η εικόνα που έχουμε δώσει, φιλτραρισμένη απο το φίλτρο.
+Τέλος αποθηκεύουμε και τις δυο εικόνες σε δυο νέες μεταβλητές.
+
+[Discrete]
+==== Median Filter
+
+Το Median φίλτρο είναι παρόμοιο φίλτρο με το mean, μόνο που αντί να βρίσκει τον μέσο όρο των pixel, βρίσκει τη μεσαία τιμή όλων των pixel και ορίζει στο κεντρικό pixel αυτή τη τιμή.
+Αυτό το φίλτρο είναι ιδιαίτερα αποτελεσματικό στην απαλοιφή του θορύβου Salt & Pepper όπως θα δούμε παρακάτω.
+
+Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές κώδικα:
+
+[source, python]
+--
+# Use median filter on images, kernel size 5x5
+medianFilterSP = cv2.medianBlur(spnoisy_img, 5)
+medianFilterPoisson = cv2.medianBlur(poisson_img, 5)
+--
+
+Η εφαρμογή γίνεται με την χρήση της {urlmedianblur}[medianBlur] της βιβλιοθήκης OpenCV. Την εφαρμόζουμε όπως και πριν μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Τα ορίσματα που δίνουμε είναι η εικόνα μας και το μέγεθος του πυρήνα, στην περίπτωση μας 5x5.
+Η συνάρτηση μας μετά την εκτέλεση επιστρέφει μια καινούρια εικόνα, η οποία είναι η εικόνα που έχουμε δώσει, φιλτραρισμένη απο το φίλτρο. Βάζουμε και τις δυο εικόνες σε δυο νέες μεταβλητές.
+
+[Discrete]
+==== Gaussian Blur
+
+Το φίλτρο Gaussian Blur ή Gaussian Smoothing δουλεύει με παρόμοιο τρόπο, μόνο που θολώνει την εικόνα με βάση την κατανομή Gauss. Το φίλτρο δηλαδή αποτελείται από ορισμένες τιμές που ακολουθούν την κατανομή Gauss και καθώς
+φιλτράρει την εικόνα μας, αλλάζει την τιμή των pixel. Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές:
+
+[source, python]
+--
+# Use gaussian filter on images, kernel size 5x5
+gaussianFilterSP = cv2.GaussianBlur(spnoisy_img, (5, 5), 0, 0)
+gaussianFilterPoisson = cv2.GaussianBlur(poisson_img, (5, 5), 0, 0)
+--
+
+Η εφαρμογή γίνεται με τη χρήση της {urlgaussblur}[GaussianBlur] της βιβλιοθήκης OpenCV. Την εφαρμόζουμε ξανά όπως και πριν μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Για ορίσματα δίνουμε την εικόνα μας, το μέγεθος του πυρήνα, ξανά 5x5, και το σ (sigma) στον άξονα x και y αντίστοιχα για τις τιμές του φίλτρου. Δίνοντας την τιμή 0 και για τα δυο, το deviation
+υπολογίζεται αυτόματα με βάση το μέγεθος του πυρήνα.
+
+=== Ερώτημα 4
+
+Σε αυτό το ερώτημα θα εμφανίσουμε τις εικόνες, μετά την προσπάθεια για μείωση του θορύβου.
+Η εμφάνιση και η αποθήκευση της κάθε εικόνας γίνεται με τον τρόπο που έχουμε αναλύσει προηγουμένως σε άλλα ερωτήματα στις παρακάτω γραμμές:
+
+[source, python]
+--
+# Show image after mean filter, save in same directory
+cv2.namedWindow('Mean Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Salt & Pepper)', meanFilterSP)
+cv2.imwrite('MeanFilteredSP.jpg', meanFilterSP)
+cv2.namedWindow('Mean Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Mean Filter (Shot)', meanFilterPoisson)
+cv2.imwrite('MeanFilteredPoisson.jpg', meanFilterPoisson)
+
+# Show image after median filter, save in same directory
+cv2.namedWindow('Median Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Salt & Pepper)', medianFilterSP)
+cv2.imwrite('MedianFilteredSP.jpg', medianFilterSP)
+cv2.namedWindow('Median Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Median Filter (Shot)', medianFilterPoisson)
+cv2.imwrite('MedianFilteredPoisson.jpg', medianFilterPoisson)
+
+# Show image after gaussian filter, save in same directory
+cv2.namedWindow('Gaussian Filter (Salt & Pepper)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Salt & Pepper)', gaussianFilterSP)
+cv2.imwrite('GaussianFilteredSP.jpg', gaussianFilterSP)
+cv2.namedWindow('Gaussian Filter (Shot)', cv2.WINDOW_NORMAL)
+cv2.imshow('Gaussian Filter (Shot)', gaussianFilterPoisson)
+cv2.imwrite('GaussianFilteredPoisson.jpg', gaussianFilterPoisson)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+--
+
+Κατά την εμφάνιση λαμβάνουμε τα παρακάτω αποτελέσματα:
+
+Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε μια μέγαλη αλλαγή και φαίνεται σαν ένα κομμάτι του θορύβου να μην υπάρχει πια.
+
+.Salt and Pepper noisy image, filtered using Mean Filter
+image::MeanFilteredSP.jpg[]
+
+Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Median Filter. Τα αποτελέσματα είναι εξαιρετικά. Το φίλτρο δούλεψε πολύ καλύτερα σε σχέση με το Mean.
+
+.Salt and Pepper noisy image, filtered using Median Filter
+image::MedianFilteredSP.jpg[]
+
+Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Gaussian Blur. Τα αποτελέσματα μας δεν είναι τόσο ικανοποιήτικα. Στο μάτι τουλάχιστον, φαίνεται να είναι χειρότερο και από το Mean φίλτρο.
+
+.Salt and Pepper noisy image, filtered using Gaussian Blur
+image::GaussianFilteredSP.jpg[]
+
+Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε ότι σε σχέση με την εικόνα του θορύβου, υπάρχει μια σημαντική βελτίωση.
+
+.Poisson Shot noisy image, filtered using Mean Filter
+image::MeanFilteredPoisson.jpg[]
+
+Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Median Filter. Στο μάτι τουλάχιστον φαίνεται το αποτέλεσμα να είναι χειρότερο από το αποτέλεσμα του φίλτρου Mean και επίσης όχι πολύ ικανοποιητικά.
+
+.Poisson Shot noisy image, filtered using Median Filter
+image::MedianFilteredPoisson.jpg[]
+
+Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Gaussian Blur. Τα αποτελέσματα φαίνονται καλύτερα σε σχέση με το Median σίγουρα αλλά όχι μεγάλη διαφορά σε σχέση με το Mean. Όπως και να έχει, δεν ήταν πολύ αποτελεσματική η εξομάλυνση.
+
+.Poisson Shot noisy image, filtered using Gauss Blur
+image::GaussianFilteredPoisson.jpg[]
+
+=== Ερώτημα 6
+
+Στο παρακάτω ερώτημα γίνεται η σύγκριση της αρχικής εικόνας με το τελικό μας αποτέλεσμα κάθε φορά
