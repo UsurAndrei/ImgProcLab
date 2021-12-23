@@ -534,6 +534,68 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 
 </style>
@@ -728,7 +790,7 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install();
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
@@ -737,33 +799,390 @@ asciidoc.install();
 <h1>Ψηφιακή Επεξεργασία Εικόνας - Εργασία 1</h1>
 <span id="author">Ρούσου Αντρέι</span><br />
 <span id="email"><code>&lt;<a href="mailto:cs171075@uniwa.gr">cs171075@uniwa.gr</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Πίνακας Περιεχομένων</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
 <h2 id="_εισαγωγή">Εισαγωγή</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Η εργασία έγινε στα πλαίσια του μαθήματος Ψηφιακή Επεξεργασία Εικόνας κατά το ακαδημαικό έτος 2021-2022 και αποτελείται από δύο μέρη συνολικ</p></div>
-<div class="paragraph"><p>Στο πρώτο μέρος, στο πρώτο ερώτημα, γίνεται η ανάπτυξη μιας συνάρτησης, η οποία παίρνει δύο ορίσματα, την αρχική μας είκονα  και μια τιμή από 0 εώς 255. Η συνάρτηση μας με όνομα solarize κάνει ένα απλό pseudo-solarization, δηλαδή δίνοντας μια τιμή και την αρχική μας  εικόνα, όλα τα pixel της εικόνας με τιμή μεγαλύτερη ή ίση με το κατώφλι θα διατηρήσουν την τιμή που είχαν αρχικά, ενώ τα pixels με τιμή μικρότερη του κατωφλιού, θα αντικατασταθούν από pixel με τιμή το συμπλήρωμα του αρχικού, δηλαδή (255 - αρχική τιμή pixel). Αφού αναπτύξουμε την ζητούμενη συνάρτηση, ακολουθούν δυο ερωτήματα δοκιμής και αναπαράστασης των αποτελεσμάτων.</p></div>
-<div class="paragraph"><p>Το δεύτερο ερώτημα αποτελείται από 3 δοκιμές της λειτουργίας της συνάρτησης μας δίνοντας ως κατώφλι τις τιμές 64, 128, 192. Πριν τις δοκιμές φυσικά η εικόνα μετατρέπεται σε grayscale ώστε να μήν έχουμε περισσότερα κανάλια χρώματος, αλλά μόνο το γκρι. Θα έχουμε ουσιαστικά μια ασπρόμαυρη εικόνα. Στην συνέχεια πάνω στην εικόνα μας, θα γίνει η δοκιμή με τις τιμές που δόθηκαν.</p></div>
-<div class="paragraph"><p>Τέλος στο τρίτο και τελευταίο ερώτημα, θα γίνει η εμφάνιση και η αποθήκευση των αποτελεσμάτων μας.</p></div>
+<div class="paragraph"><p>Η εργασία έγινε στα πλαίσια του μαθήματος Ψηφιακή Επεξεργασία Εικόνας κατά το ακαδημαϊκό έτος 2021-2022 και αποτελείται από δύο μέρη συνολικά.</p></div>
+<div class="paragraph"><p>Στο πρώτο μέρος, στο πρώτο ερώτημα, γίνεται η ανάπτυξη μιας συνάρτησης, η οποία παίρνει δύο ορίσματα, την αρχική μας εικόνα  και μια τιμή από 0 εώς 255. Η συνάρτηση μας με όνομα solarize κάνει ένα απλό pseudo-solarization, δηλαδή δίνοντας μια τιμή και την αρχική μας  εικόνα, όλα τα pixel της εικόνας με τιμή μεγαλύτερη ή ίση με το κατώφλι θα διατηρήσουν την τιμή που είχαν αρχικά, ενώ τα pixels με τιμή μικρότερη του κατωφλιού, θα αντικατασταθούν από pixel με τιμή το συμπλήρωμα του αρχικού, δηλαδή (255 - αρχική τιμή pixel). Αφού αναπτύξουμε τη ζητούμενη συνάρτηση, ακολουθούν δυο ερωτήματα δοκιμής και αναπαράστασης των αποτελεσμάτων.</p></div>
+<div class="paragraph"><p>Το δεύτερο ερώτημα αποτελείται από 3 δοκιμές της λειτουργίας της συνάρτησης μας δίνοντας ως κατώφλι τις τιμές 64, 128, 192. Πριν τις δοκιμές φυσικά η εικόνα μετατρέπεται σε grayscale ώστε να μήν έχουμε περισσότερα κανάλια χρώματος, αλλά μόνο το γκρι. Θα έχουμε ουσιαστικά μια ασπρόμαυρη εικόνα. Στη συνέχεια πάνω στην εικόνα μας, θα γίνει η δοκιμή με τις τιμές που δόθηκαν.</p></div>
+<div class="paragraph"><p>Τέλος, στο τρίτο και τελευταίο ερώτημα, θα γίνει η εμφάνιση και η αποθήκευση των αποτελεσμάτων μας.</p></div>
+<div class="paragraph"><p>Το δεύτερο μέρος αρχίζει με παρόμοια διαδικασία. Στο πρώτο ερώτημα δίνουμε μια εικόνα και κάνουμε την μετατροπή σε grayscale. Ακολουθεί το δεύτερο ερώτημα, το οποίο αφορά εισαγωγή θορύβου. Σε αυτό το ερώτημα το πρώτο ζητούμενο αφορά την εισαγωγή θορύβου salt and pepper, δηλαδή θορύβου που αποτελείται από μαύρα (0) και άσπρα pixels (255) τα οποία εμφανίζονται με συγκεκριμένη πιθανότητα για κάθε pixel (10% να γίνει το pixel μας άσπρο ή μαύρο).</p></div>
+<div class="paragraph"><p>Για το δεύτερο ζητούμενο του δεύτερου ερωτήματος, πρέπει να εισάγουμε έναν δικό μας θόρυβο στην εικόνα, οποιονδήποτε εκτός απο Gaussian Noise. Για το συγκεκριμένο υποερώτημα έγινε η επιλογή Shot noise, δηλαδή θορύβου που σχετίζεται με την κατανομή Poisson. Δηλαδή με τον κατάλληλο τρόπο τα pixels την τελικής εικόνας μας που θα έχει επηρεαστεί από τον θόρυβο, θα ακολουθούν κατανομή Poisson.</p></div>
+<div class="paragraph"><p>Στο τρίτο ερώτημα μας ζητείται να εμφανίζουμε τις εικόνες, με τον θόρυβο που έχουμε εισάγει.</p></div>
+<div class="paragraph"><p>Στο τέταρτο ερώτημα μας ζητείται να αφαιρέσουμε τον θόρυβο που έχουμε εισάγει στα προηγούμενα ερωτήματα με τρία διαφορετικά φίλτρα τα οποία τα επιλέγουμε εμείς. Για την υλοποίηση έχει γίνει η επιλογή των φίλτρων mean blur, median blur και gaussian blur.</p></div>
+<div class="paragraph"><p>Στο πέμπτο ερώτημα απλά εμφανίζουμε της εικόνες, αφού τις έχουμε περάσει με τα φίλτρα τις επιλογής μας. Τα αποτελέσματα θα αναλυθούν παρακάτω.</p></div>
+<div class="paragraph"><p>Τέλος, το έκτο ερώτημα του δεύτερου μέρους μας ζητάει να συγκρίνουμε τις τελικές εικόνες, τις οποίες έχουμε επεξεργαστεί με τα φίλτρα μας προσπαθώντας να αφαιρέσουμε τον θόρυβο με την αρχική μας εικόνα. Για τη σύγκριση αυτή ζητείται να χρησιμοποιήσουμε δυο μετρικές. Στο πρώτο υποερώτημα ζητείται η χρήση του Structural Similarity Index Measure (SSIM), μετρική που χρησιμοποιείται πολύ για σύγκριση δυο εικόνων.</p></div>
+<div class="paragraph"><p>Στο δεύτερο υποερώτημα, ζητείται να γίνει χρήση μιας μετρικής της επιλογής μας. Θα γίνει χρήση για αυτή την περίπτωση, του Mean Square Error (MSE), του Μέσου Τετραγωνικού Σφάλματος δηλαδή.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_μέρος_πρώτο">Μέρος Πρώτο</h2>
+<h2 id="_μεθοδολογία_μέρος_πρώτο">Μεθοδολογία - Μέρος Πρώτο</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Παρακάτω η μεθοδολογία που ακολουθήσαμε  και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.</p></div>
+<div class="paragraph"><p>Παρακάτω η μεθοδος που ακολουθήσαμε για την απάντηση των ερωτημάτων και τα αποτελέσματα που λαμβάνουμε για το πρώτο μέρος της εργασίας.</p></div>
 <div class="sect2">
-<h3 id="_μεθοδολογία">Μεθοδολογία</h3>
-<div class="paragraph"><p>Για το ζητούμενο του πρώτου ερωτήματος έγινε η ανάπτυξη του παρακάτω κώδικα:</p></div>
+<h3 id="_κώδικας">Κώδικας</h3>
+<div class="paragraph"><p>Για τα ζητούμενα του πρώτου μέρους έγινε η ανάπτυξη του παρακάτω κώδικα:</p></div>
 <div class="listingblock">
 <div class="title">sabbatier.py</div>
 <div class="content"></div></div>
+<div class="paragraph"><p>Στην αρχή του κώδικα κάνουμε import τις βιβλιοθήκες που θα χρειαστούμε, τις <a href="https://pypi.org/project/opencv-python/">OpenCV</a> και <a href="https://numpy.org/">NumPY</a> αντίστοιχα.</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_1">Ερώτημα 1</h3>
+<div class="paragraph"><p>Η συνάρτηση που ζητήθηκε για το πρώτο ερώτημα είναι η παρακάτω:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Η συνάρτηση μας δέχεται δύο ορίσματα, όπως αυτά ζητήθηκαν, την αρχική μας εικόνα και μια τιμή thresValue. Κατά την εκτέλεση της συνάρτησης μας, δημιουργούμε μια εικόνα με όνομα solarized_image, η οποία θα αποτελεί την εικόνα που θα επιστρέψει η συνάρτηση μας.
+Η αρχικοποίηση της εικόνας μας, γίνεται με μηδενικά bit με τη χρήση της συνάρτησης <a href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html">zeros</a> της βιβλιοθήκης <a href="https://numpy.org/">numpy</a>,
+αρχικοποιώντας έτσι την εικόνα μας, με μηδενικά bit, σε ίδιο μέγεθος με την αρχική εικόνα που δίνουμε για όρισμα. Δίνουμε στη συνάρτηση zeros μας και τον τύπο δεδομένων uint8, unsigned integer των 8-bit δηλαδή, εύρος τιμών 0 εώς 255, δηλαδή οι τιμές
+που μπορεί να πάρει ένα pixel.</p></div>
+<div class="paragraph"><p>Έχει ενδιαφέρον να γίνει μια ανάλυση της συνάρτησης shape. Η συνάρτηση αυτή επιστρέφει ένα tupple με 3 στοιχεία, των αριθμό των γραμμών, των στηλών και τέλος τα κανάλια. Αυτό έχει σημασία διότι με ευκολία μπορούμε με μια for να πάρουμε κάθε γραμμή της εικόνας και με
+μια άλλη for κάθε στήλη, όπως ακριβώς θα κάναμε αν θέλαμε να έχουμε πρόσβαση σε κάθε στοιχείο ενός πίνακα δυο διαστάσεων.</p></div>
+<div class="paragraph"><p>Αφού λοιπόν μπορούμε να το κάνουμε αυτό, μένει μόνο να συγκρίνουμε την τιμή του κάθε pixel της αρχικής εικόνας με την τιμή που έχουμε δώσει για
+το κατώφλι. Αν είναι μεγαλύτερη, το pixel κρατάει την τιμή που είχε, δηλαδή στη νέα εικόνα μας κάνουμε εκχώρηση της τιμής του pixel της αρχικής εικόνας στο αντίστοιχο pixel της εικόνας που θα επιστρέψει η συνάρτηση μας.
+Αλλιώς, αν είναι μικρότερη, εκχωρούμε στο pixel την τιμή (255 - την τιμή του pixel της αρχικής εικόνας), το συμπλήρωμα δηλαδή όπως ζητήθηκε στην εκφώνηση. Τέλος, φυσικά αφού έχει γίνει ο έλεγχος σε κάθε pixel, η συνάρτηση μας επιστρέψει τη solarized εικόνα μας.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_2">Ερώτημα 2</h3>
+<div class="paragraph"><p>Για την εφαρμογή της συνάρτησης μας σε μια εικόνα, ακολουθούμε τα παρακάτω βήματα:</p></div>
+<div class="paragraph"><p>Αρχικά θα «ανοίξουμε» την αρχική μας εικόνα με τη χρήση της συνάρτησης <a href="https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56">imread</a> της βιβλιοθήκης <a href="https://docs.opencv.org/4.x/index.html">OpenCV</a>.
+H συνάρτηση imread δέχεται σαν όρισμα το όνομα της εικόνας μας. Για τη δοκιμή θα χρησιμοποιήσουμε μια εικόνα του μεγάλου Gilles Villeneuve οδηγώντας τη Ferrari 312T4 στο Gran Prix του Monaco το 1979. Διαβάζουμε την εικόνα με τον παρακάτω τρόπο:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Στην imread μπορούμε να προσθέσουμε σαν όρισμα και flag τα κανάλια χρώματος που θέλουμε. Παρατηρώντας στο documentation με flag 2 η εικόνα μας θα μπορούσε να διαβαστεί και να γίνει η ζητούμενη μετατροπή σε gray-scale κατευθείαν.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Όμως η μετατροπή μπορεί να γίνει και με τον παρακάτω τρόπο:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Χρησιμοποιούμε δηλαδή τη συνάρτηση <a href="https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab">cvtColor</a> της βιβλιοθήκης OpenCV.
+Η συνάρτηση αυτή δέχεται σαν όρισμα την εικόνα μας και το αντίστοιχο enum που αντιστοιχεί σε μετατροπή απο τρία κανάλια χρώματος σε grayscale. Η συνάρτηση μας επιστρέφει την grayscale εικόνα η οποία θα μπει στη μεταβλητή gray_image μας.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Η μεταβλητή gray_image μπορεί να περαστεί και σαν όρισμα κατά την κλήση της συνάρτησης cvtColor για την αποθήκευση της grayscale εικόνας μας.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Πλέον στη μεταβλητή gray_image θα έχουμε ίδια εικόνα με την αρχική, μόνο που θα είναι σε grayscale όπως μας ζητήθηκε. Αρκεί τώρα να δημιουργήσουμε τρεις μεταβλητές για τις solarized εικόνες και να καλέσουμε τη συνάρτηση μας με το ζητούμενο κατώφλι.
+Η διαδικασία γίνεται παρακάτω:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Πλέον έχουμε τρεις μεταβλητές, solarized_img64, solarized_img128 και solarized_img192 που περιέχουν την πληροφορία για τρεις solarized εικόνες μας, αποτέλεσμα την κλήσης της συνάρτησης μας με κατώφλι 64, 128 και 192 αντίστοιχα. Κατά την κλήση, δίνουμε
+όπως αναφέραμε και πριν, την αρχική μας εικόνα (σε grayscale) και το κατώφλι για ορίσματα.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_3">Ερώτημα 3</h3>
+<div class="paragraph"><p>Απομένει λοιπόν η εμφάνιση των αποτελεσμάτων, η οποία γίνεται στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Για την εμφάνιση δημιουργούμε ένα παράθυρο με τη συνάρτηση <a href="https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga5afdf8410934fd099df85c75b2e0888b">namedWindow</a> της βιβλιοθήκης OpenCV, δίνοντας για όρισμα το όνομα που θέλουμε για το παράθυρο και ένα flag, στην περίπτωση μας το WINDOW_NORMAL που αντιστοιχεί σε παράθυρο του οποίου μπορούμε να αλλάξουμε το μέγεθος. Η διαδικασία γίνεται τρεις φορές για κάθε παράθυρο.
+Μετά από τη δημιουργία του παραθύρου, με τη χρήση της συνάρτησης <a href="https://docs.opencv.org/4.x/d7/dfc/group__highgui.html#ga453d42fe4cb60e5723281a89973ee563">imshow</a> της βιβλιοθήκης OpenCV, δίνοντας για ορίσματα το όνομα του παραθύρου που δημιουργήσαμε σε κάθε περίπτωση προηγουμένως και την εικόνα. Η ίδια διαδικασία γίνεται τρεις φορές για κάθε εικόνα που έχουμε στο παράδειγμα μας.</p></div>
+<div class="paragraph"><p>Για σύγκριση, αν και δεν υπάρχει στα ζητούμενα, εμφανίζουμε και την original εικόνα, στην αρχική μορφή και σε grayscale με αντίστοιχο τρόπο στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Παρακάτω τα αποτελέσματα που λαμβάνουμε:</p></div>
+<div class="paragraph"><p>Παρακάτω η αρχική μας εικόνα, στην αρχική της μορφή:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Original.jpg" alt="Original.jpg" />
+</div>
+<div class="title">Image 1. Original Image</div>
+</div>
+<div class="paragraph"><p>Η αρχική μας εικόνα, σε μορφή grayscale. Παρατηρούμε ότι υπάρχει ένα κανάλι (γκρί) και λείπουν τα χρώματα.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GrayScaleImg.jpg" alt="GrayScaleImg.jpg" />
+</div>
+<div class="title">Image 2. GrayScale Image</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η αρχική μας εικόνα, solarized με κατώφλι 64. Παρατηρούμε ότι τα μαύρα pixels έχουν αντικατασταθεί με άσπρα και κάποια πολύ σκούρα έχουν αντικατασταθεί με το συμπλήρωμα τους αν και δε φαίνεται πολύ στο μάτι μας.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Solarized64.jpg" alt="Solarized64.jpg" />
+</div>
+<div class="title">Image 3. Solarized Image (64)</div>
+</div>
+<div class="paragraph"><p>Η εικόνα παρακάτω βλέπουμε πλέον έχει χάσει αρκετά από τα πολύ σκούρα pixels καθώς το κατώφλι είναι σχεδόν στη μέση, οπότε ακόμα και το συμπλήρωμα με το οποίο θα αντικαταστήσουμε πολλά από τα pixels είναι επίσης ανοιχτόχρωμο.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Solarized128.jpg" alt="Solarized128.jpg" />
+</div>
+<div class="title">Image 4. Solarized Image (128)</div>
+</div>
+<div class="paragraph"><p>Τέλος παρακάτω η εικόνα solarized με κατώφλι 192, βλέπουμε ότι σχεδόν όλα τα σκούρα pixels έχουν αντικατασταθεί, ενω ορισμένα που είχαν σχετικά ανοιχτόχρωμη τιμή έχουν τονιστεί πιο έντονα, το οποίο είναι λογικό, καθώς με υψηλό κατώφλι, το συμπλήρωμα ορισμένων ανοιχτόχρωμων pixels θα είναι σκουρόχρωμο.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Solarized192.jpg" alt="Solarized192.jpg" />
+</div>
+<div class="title">Image 5. Solarized Image (192)</div>
+</div>
+<div class="paragraph"><p>Σε κάθε περίπτωση η αποθήκευση της κάθε εικόνας γίνεται με τη χρήση της συνάρτησης <a href="https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce">imwrite</a> της βιβλιοθήκης OpenCV. Η συνάρτηση δέχεται σαν όρισμα το όνομα της εικόνας που θα έχει το αρχείο και τη μεταβλητή της εικόνας μας.
+Η αποθήκευση γίνεται μια φορά για την original και την grayscale και ας μη ζητήθηκε αλλά φυσικά και στα αποτελέσματα μας όπως βλέπουμε στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Θα πρέπει μετά την εκτέλεση των παραπάνω γραμμών να υπάρχουν οι εικόνες ως αρχεία στον δίσκο μας.</p></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_μέρος_δεύτερο">Μέρος Δεύτερο</h2>
+<h2 id="_μεθοδολογία_μέρος_δεύτερο">Μεθοδολογία - Μέρος Δεύτερο</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>Παρακάτω η μέθοδος που ακολουθήσαμε για τη λύση των ερωτημάτων και τα αποτελέσματα που λαμβάνουμε για το δεύτερο μέρος της εργασίας.</p></div>
+<div class="sect2">
+<h3 id="_κώδικας_2">Κώδικας</h3>
+<div class="paragraph"><p>Για τα ζητούμενα του δεύτερου μέρους έγινε η ανάπτυξη του παρακάτω κώδικα:</p></div>
+<div class="listingblock">
+<div class="title">noise.py</div>
+<div class="content"></div></div>
+<div class="paragraph"><p>Στην αρχή κάνουμε import τις βιβλιοθήκες που θα χρησιμοποιήσουμε, τις <a href="https://pypi.org/project/opencv-python/">OpenCV</a>, <a href="https://numpy.org/">NumPY</a>, <a href="https://docs.python.org/3/library/random.html">Random</a> και ορισμένες χρήσιμες συναρτήσεις από τη <a href="https://scikit-image.org/">SciKit-Image</a>.</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_1_2">Ερώτημα 1</h3>
+<div class="paragraph"><p>Στο πρώτο ερώτημα μας ζητείται να διαβάσουμε μια εικόνα της επιλογής μας και να τη μετατρέψουμε σε grayscale.
+Θα «ανοίξουμε» την αρχική μας εικόνα με τη χρήση της συνάρτησης <a href="https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56">imread</a> όπως και στο προηγούμενο μέρος της εργασίας.
+Η μετατροπή σε grayscale θα γίνει ξανά με τη χρήση της <a href="https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab">cvtColor</a> της βιβλιοθήκης OpenCV αντίστοιχα.</p></div>
+<div class="paragraph"><p>Παρακάτω οι γραμμές κώδικα στις οποίες διαβάζουμε και μετατρέπουμε την εικόνα:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Για το συγκεκριμένο μέρος της εργασίας θα χρησιμοποιήσουμε για τις δοκιμές μας μια εικόνα του Colin McRae στο Rally της Αργεντινής το 1998 οδηγώντας το επικό Subaru Impreza του.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_2_2">Ερώτημα 2</h3>
+<div class="paragraph"><p>Στο δεύτερο ερώτημα εισάγουμε τους δύο θορύβους.</p></div>
+<div class="paragraph"><p>Παρακάτω ο κώδικας για την εισαγωγή Salt and Pepper θορύβου 10%:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Αρχικά αρχικοποιούμε με τη συνάρτηση zeros της βιβλιοθήκης np μια εικόνα, όπως αντίστοιχα κάναμε και για το πρώτο μέρος της εργασίας.
+Έπειτα τα βήματα είναι απλά, όπως και στο πρώτο μέρος της εργασίας θα πάρουμε ένα - ένα τα pixels της εικόνας. Έπειτα για κάθε pixel στην επανάληψη, με την χρήση της συνάρτησης <a href="https://docs.python.org/3/library/random.html">random</a>, της random της NumPY.
+Η συνάρτηση αυτή μας δημιουργεί έναν τυχαίο πραγματικό αριθμό, by default στο διάστημα [0.0 1.0). Αν ο αριθμός αυτός είναι μικρότερος του 0.05, δίνουμε στο pixel την τιμή 0, δηλαδή μαύρο. Η πιθανότητα ο αριθμός να είναι μικρότερος της τιμής 0.05 είναι 5%.</p></div>
+<div class="paragraph"><p>Αν ο τυχαίος αριθμός που δημιουργήσαμε είναι μεγαλύτερος του αριθμού 0.95, επίσης δηλαδή πιθανότητα 5% να γίνει, ορίζουμε στο pixel την τιμή 255 δηλαδή απόλυτο άσπρο. Το αποτέλεσμα είναι τελικά στην εικόνα μας, να εμφανίζονται πολλά pixel με τιμή 0 και 255.
+Αυτό είναι γνωστό ως το Salt &amp; Pepper noise. Στο συγκεκριμένο παράδειγμα, η πιθανότητα ένα pixel να πάρει τιμή 0 ή 255 είναι 10%, δημιουργώντας έτσι ένα 10% Salt &amp; Pepper noise.</p></div>
+<div class="paragraph"><p>Τέλος, αν ο αριθμός που δημιουργήσαμε είναι ανάμεσα στις τιμές 0.05 και 0.95, πιθανότητα 90%, κρατάει την αρχική του τιμή.
+Σε κάθε περίπτωση, ορίζουμε στην νέα εικόνα μας τιμές 0,255, ή την τιμή του αντίστοιχου pixel στην αρχική εικόνα.</p></div>
+<div class="paragraph"><p>Παρακάτω ο κώδικας για την εισαγωγή του Shot θορύβου (Poisson):</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Για την εισαγωγή του θορύβου στην εικόνα μας αρχικά δημιουργούμε τον ίδιο τον θόρυβο, με τη χρήση της συνάρτησης <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.poisson.html">poisson</a>.
+Έπειτα για να είναι οι τιμές στο διάστημα που θέλουμε, 0 εως 255, περνάμε τις τιμές από την <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html">astype</a> με τύπο unsigned integer των 8 bit.
+Τέλος, προσθέτουμε τις τιμές του θορύβου στην αρχική μας εικόνα.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Τα pixel στην τελική εικόνα μας ακολουθούν κατανομή Poisson. Όμως αν δούμε το ιστόγραμμα τις εικόνας, θα δούμε ότι προς το τέλος των τιμών υπάρχει μια αύξηση που δεν ξέρω αν είναι σωστή. Φαντάζομαι ίσως έχει να κάνει με τη χρήση της astype για να μην υπάρχουν τιμές άνω των 255.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_3_2">Ερώτημα 3</h3>
+<div class="paragraph"><p>Στο ερώτημα 3 εμφανίζουμε τις εικόνες μας με θόρυβο, η εμφάνιση γίνεται στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Όπως και στο μέρος πρώτο τις εργασίας, για την εμφάνιση δημιουργούμε το παράθυρο με τη χρήση της namedWindow και εμφανίζουμε την εικόνα με τη χρήση της imshow.
+Τέλος, αποθηκεύουμε και την εικόνα με τη χρήση της imwrite.</p></div>
+<div class="paragraph"><p>Παρακάτω τα αποτελέσματα που λαμβάνουμε, σε σύγκριση με την αρχική Grayscaled εικόνα:</p></div>
+<div class="paragraph"><p>Αρχικά η αρχική μας εικόνα:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GrayScaleImg2.jpg" alt="GrayScaleImg2.jpg" />
+</div>
+<div class="title">Image 6. Original Image (Grayscale)</div>
+</div>
+<div class="paragraph"><p>Παρατηρούμε στην παρακάτω εικόνα ότι εμφανίζονται πολλαπλά μαύρα και άσπρα pixel σε τυχαία σημεία της αρχικής εικόνας μας, δηλαδή την εικόνα με τον θόρυβο Salt &amp; Pepper.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SaltAndPepper.jpg" alt="SaltAndPepper.jpg" />
+</div>
+<div class="title">Image 7. Salt &amp; Pepper Noise</div>
+</div>
+<div class="paragraph"><p>Παρατηρούμε παρακάτω ότι υπάρχει θόρυβος στην εικόνα μας με τα pixel να έχουν χάσει την αρχική τους τιμή. Τα pixel πλέον της εικόνας μας ακολουθούν κατανομή Poisson.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ShotNoise.jpg" alt="ShotNoise.jpg" />
+</div>
+<div class="title">Image 8. Shot Noise</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_4">Ερώτημα 4</h3>
+<div class="paragraph"><p>Το Mean φίλτρο είναι ένα απλό, γρήγορο φίλτρο, με συγκεκριμένο μέγεθος πυρήνα (kernel), τετράγωνο ή άλλου σχήματος το οποίο αντικαθιστά το μεσαίο pixel του φίλτρου με το μέσο όρο των γειτονικών pixel (με την τιμή του ίδιου του pixel να μετράει επίσης).
+Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Η εφαρμογή γίνεται με την χρήση της <a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37">blur</a> της βιβλιοθήκης OpenCV. Την εφαρμόζουμε μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Τα ορίσματα που δίνουμε είναι η εικόνα μας και το μέγεθος του πυρήνα, στην περίπτωση μας 5x5.
+Η συνάρτηση μας κάθε φορά επιστρέφει μια καινούρια εικόνα, η οποία είναι η εικόνα που έχουμε δώσει, φιλτραρισμένη απο το φίλτρο.
+Τέλος αποθηκεύουμε και τις δυο εικόνες σε δυο νέες μεταβλητές.</p></div>
+<div class="paragraph"><p>Το Median φίλτρο είναι παρόμοιο φίλτρο με το mean, μόνο που αντί να βρίσκει τον μέσο όρο των pixel, βρίσκει τη μεσαία τιμή όλων των pixel και ορίζει στο κεντρικό pixel αυτή τη τιμή.
+Αυτό το φίλτρο είναι ιδιαίτερα αποτελεσματικό στην απαλοιφή του θορύβου Salt &amp; Pepper όπως θα δούμε παρακάτω.</p></div>
+<div class="paragraph"><p>Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές κώδικα:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Η εφαρμογή γίνεται με την χρήση της <a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga564869aa33e58769b4469101aac458f9">medianBlur</a> της βιβλιοθήκης OpenCV. Την εφαρμόζουμε όπως και πριν μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Τα ορίσματα που δίνουμε είναι η εικόνα μας και το μέγεθος του πυρήνα, στην περίπτωση μας 5x5.
+Η συνάρτηση μας μετά την εκτέλεση επιστρέφει μια καινούρια εικόνα, η οποία είναι η εικόνα που έχουμε δώσει, φιλτραρισμένη απο το φίλτρο. Βάζουμε και τις δυο εικόνες σε δυο νέες μεταβλητές.</p></div>
+<div class="paragraph"><p>Το φίλτρο Gaussian Blur ή Gaussian Smoothing δουλεύει με παρόμοιο τρόπο, μόνο που θολώνει την εικόνα με βάση την κατανομή Gauss. Το φίλτρο δηλαδή αποτελείται από ορισμένες τιμές που ακολουθούν την κατανομή Gauss και καθώς
+φιλτράρει την εικόνα μας, αλλάζει την τιμή των pixel. Η εφαρμογή του φίλτρου γίνεται στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Η εφαρμογή γίνεται με τη χρήση της <a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1">GaussianBlur</a> της βιβλιοθήκης OpenCV. Την εφαρμόζουμε ξανά όπως και πριν μια φόρα για κάθε εικόνα που έχουμε με τους δυο θορύβους.
+Για ορίσματα δίνουμε την εικόνα μας, το μέγεθος του πυρήνα, ξανά 5x5, και το σ (sigma) στον άξονα x και y αντίστοιχα για τις τιμές του φίλτρου. Δίνοντας την τιμή 0 και για τα δυο, το deviation
+υπολογίζεται αυτόματα με βάση το μέγεθος του πυρήνα.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_4_2">Ερώτημα 4</h3>
+<div class="paragraph"><p>Σε αυτό το ερώτημα θα εμφανίσουμε τις εικόνες, μετά την προσπάθεια για μείωση του θορύβου.
+Η εμφάνιση και η αποθήκευση της κάθε εικόνας γίνεται με τον τρόπο που έχουμε αναλύσει προηγουμένως σε άλλα ερωτήματα στις παρακάτω γραμμές:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Κατά την εμφάνιση λαμβάνουμε τα παρακάτω αποτελέσματα:</p></div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε μια μέγαλη αλλαγή και φαίνεται σαν ένα κομμάτι του θορύβου να μην υπάρχει πια.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MeanFilteredSP.jpg" alt="MeanFilteredSP.jpg" />
+</div>
+<div class="title">Image 9. Salt and Pepper noisy image, filtered using Mean Filter</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Median Filter. Τα αποτελέσματα είναι εξαιρετικά. Το φίλτρο δούλεψε πολύ καλύτερα σε σχέση με το Mean.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MedianFilteredSP.jpg" alt="MedianFilteredSP.jpg" />
+</div>
+<div class="title">Image 10. Salt and Pepper noisy image, filtered using Median Filter</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Gaussian Blur. Τα αποτελέσματα μας δεν είναι τόσο ικανοποιήτικα. Στο μάτι τουλάχιστον, φαίνεται να είναι χειρότερο και από το Mean φίλτρο.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GaussianFilteredSP.jpg" alt="GaussianFilteredSP.jpg" />
+</div>
+<div class="title">Image 11. Salt and Pepper noisy image, filtered using Gaussian Blur</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε ότι σε σχέση με την εικόνα του θορύβου, υπάρχει μια σημαντική βελτίωση.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MeanFilteredPoisson.jpg" alt="MeanFilteredPoisson.jpg" />
+</div>
+<div class="title">Image 12. Shot noisy image, filtered using Mean Filter</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Median Filter. Στο μάτι τουλάχιστον φαίνεται το αποτέλεσμα να είναι χειρότερο από το αποτέλεσμα του φίλτρου Mean και επίσης όχι πολύ ικανοποιητικά.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MedianFilteredPoisson.jpg" alt="MedianFilteredPoisson.jpg" />
+</div>
+<div class="title">Image 13. Shot noisy image, filtered using Median Filter</div>
+</div>
+<div class="paragraph"><p>Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Gaussian Blur. Τα αποτελέσματα φαίνονται καλύτερα σε σχέση με το Median σίγουρα αλλά όχι μεγάλη διαφορά σε σχέση με το Mean. Όπως και να έχει, δεν ήταν πολύ αποτελεσματική η εξομάλυνση.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GaussianFilteredPoisson.jpg" alt="GaussianFilteredPoisson.jpg" />
+</div>
+<div class="title">Image 14. Shot noisy image, filtered using Gauss Blur</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ερώτημα_6">Ερώτημα 6</h3>
+<div class="paragraph"><p>Στο παρακάτω ερώτημα γίνεται η σύγκριση της αρχικής εικόνας με το τελικό μας αποτέλεσμα κάθε φορά. Για τη σύγκριση χρησιμοποιούμε τη μετρική Structural Similarity Index Measure (SSIM) για το πρώτο υποερώτημα και Mean Square Error (MSE), του Μέσου Τετραγωνικού Σφάλματος δηλαδή για το δεύτερο.</p></div>
+<div class="paragraph"><p>Η σύγκριση γίνεται στις παρακάτω γραμμές του κώδικα:</p></div>
+<div class="listingblock">
+<div class="content"></div></div>
+<div class="paragraph"><p>Για τη σύγκριση με τη μετρική SSIM, χρησιμοποιούμε τη συνάρτηση <a href="https://scikit-image.org/">ssim</a> της <a href="https://scikit-image.org/">scikit-image</a>.
+Για τη σύγκριση με μέσο τετραγωνικό σφάλμα, χρησιμοποιούμε τη <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html">mean_squared_error</a> της ίδιας βιβλιοθήκης.</p></div>
+<div class="paragraph"><p>Δημιουργούμε δυο μεταβλητές, sim_score και mse_score. Για κάθε εικόνα συνολικά, καλούμε και τις δύο συναρτήσεις με ορίσματα την αρχική και την ίδια την τελική εικόνα, μετά τον θόρυβο και την εξομάλυνση.
+Μετά από κάθε εκτέλεση, τυπώνουμε στο terminal τα αποτελέσματα με τη χρήση της print. Καλούμε τις ίδιες συναρτήσεις για όλες τις εικόνες, αποθηκεύοντας την τιμή στις ίδιες μεταβλητές.</p></div>
+<div class="paragraph"><p>Το SSIM μας επιστρέφει μια τιμή από το 0.0 εώς το 1.0 και αντιπροσωπεύει το σε τι ποσοστό μοιάζει η εικόνα μας με την αρχική. Το MSE θα μας επιστρέψει έναν αριθμό ο οποίος
+όσο πιο κοντά στο 0 είναι, τόσο καλύτερη ήταν η εξομάλυνση.</p></div>
+<div class="paragraph"><p>Παρακάτω τα αποτελέσματα που λάβαμε κατά την εκτέλεση του κώδικα, για τη <strong>Salt &amp; Pepper</strong> noisy εικόνα μας:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Filter</p></td>
+<td align="left" valign="top"><p class="table">SSIM</p></td>
+<td align="left" valign="top"><p class="table">MSE</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Mean Filter</p></td>
+<td align="left" valign="top"><p class="table">0.537</p></td>
+<td align="left" valign="top"><p class="table">145.050</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Median Filter</p></td>
+<td align="left" valign="top"><p class="table">0.803</p></td>
+<td align="left" valign="top"><p class="table">34.609</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Gaussian Blur</p></td>
+<td align="left" valign="top"><p class="table">0.461</p></td>
+<td align="left" valign="top"><p class="table">189.929</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Παρατηρούμε ότι και οι δύο μετρικές συμφωνούν στο ότι καλύτερη εξομάλυνση έκανε το Median φίλτρο μας, με 80% της πληροφορίας να είναι ίδιο με την αρχική. Έπειτα ακολούθει το Mean φίλτρο και τέλος το Gaussian Blur.</p></div>
+<div class="paragraph"><p>Παρακάτω τα αποτελέσματα που λάβαμε κατά την εκτέλεση του κώδικα, για τη <strong>Shot Noise</strong> noisy εικόνα μας:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Filter</p></td>
+<td align="left" valign="top"><p class="table">SSIM</p></td>
+<td align="left" valign="top"><p class="table">MSE</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Mean Filter</p></td>
+<td align="left" valign="top"><p class="table">0.411</p></td>
+<td align="left" valign="top"><p class="table">6369.601</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Median Filter</p></td>
+<td align="left" valign="top"><p class="table">0.456</p></td>
+<td align="left" valign="top"><p class="table">7753.209</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Gaussian Blur</p></td>
+<td align="left" valign="top"><p class="table">0.427</p></td>
+<td align="left" valign="top"><p class="table">6531.456</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Παρατηρούμε ότι για κάποιο λόγο οι μετρικές δε συμφωνούν. Με βάση τον SSIM όλα τα φίλτρα μας έδωσαν μια εικόνα η οποία είναι γύρω στο 40-45% ίδια με την αρχική,
+το οποίο με βάση τα αποτελέσματα που είδαμε είναι αναμενόμενο, όπως και το ότι το Median φίλτρο μας έδωσε το κάλυτερο αποτέλεσμα.</p></div>
+<div class="paragraph"><p>Δεν γνωρίζω τον λόγο για τις μεγάλες τιμές του MSE, ίσως να μην έχει γίνει σωστά η εισαγωγή του θορύβου.</p></div>
+<div class="paragraph"><p><strong>ΤΕΛΟΣ ΕΡΓΑΣΙΑΣ</strong></p></div>
+</div>
 </div>
 </div>
 </div>
@@ -771,7 +1190,7 @@ asciidoc.install();
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2021-12-12 20:57:57 EET
+ 2021-12-23 20:44:58 EET
 </div>
 </div>
 </body>
