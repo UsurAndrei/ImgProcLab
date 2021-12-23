@@ -42,7 +42,7 @@
 
 Τέλος, το έκτο ερώτημα του δεύτερου μέρους μας ζητάει να συγκρίνουμε τις τελικές εικόνες, τις οποίες έχουμε επεξεργαστεί με τα φίλτρα μας προσπαθώντας να αφαιρέσουμε τον θόρυβο με την αρχική μας εικόνα. Για τη σύγκριση αυτή ζητείται να χρησιμοποιήσουμε δυο μετρικές. Στο πρώτο υποερώτημα ζητείται η χρήση του Structural Similarity Index Measure (SSIM), μετρική που χρησιμοποιείται πολύ για σύγκριση δυο εικόνων.
 
-Στο δεύτερο υποερώτημα, ζητείται να γίνει χρήση μιας μετρικής της επιλογής μας.Θα γίνει χρήση για αυτή την περίπτωση, του Mean Square Error (MSE), του Μέσου Τετραγωνικού Σφάλματος δηλαδή.
+Στο δεύτερο υποερώτημα, ζητείται να γίνει χρήση μιας μετρικής της επιλογής μας. Θα γίνει χρήση για αυτή την περίπτωση, του Mean Square Error (MSE), του Μέσου Τετραγωνικού Σφάλματος δηλαδή.
 
 == Μεθοδολογία - Μέρος Πρώτο
 
@@ -242,6 +242,9 @@ cv2.imshow('Orig', image)
 cv2.namedWindow('Gray',cv2.WINDOW_NORMAL)
 cv2.imshow('Gray', gray_image)
 --
+
+[Discrete]
+==== Αποτελέσματα
 
 Παρακάτω τα αποτελέσματα που λαμβάνουμε:
 
@@ -527,6 +530,9 @@ cv2.imwrite('ShotNoise.jpg', poisson_img)
 Όπως και στο μέρος πρώτο τις εργασίας, για την εμφάνιση δημιουργούμε το παράθυρο με τη χρήση της namedWindow και εμφανίζουμε την εικόνα με τη χρήση της imshow.
 Τέλος, αποθηκεύουμε και την εικόνα με τη χρήση της imwrite.
 
+[Discrete]
+==== Αποτελέσματα
+
 Παρακάτω τα αποτελέσματα που λαμβάνουμε, σε σύγκριση με την αρχική Grayscaled εικόνα:
 
 Αρχικά η αρχική μας εικόνα:
@@ -635,6 +641,9 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 --
 
+[Discrete]
+==== Αποτελέσματα
+
 Κατά την εμφάνιση λαμβάνουμε τα παρακάτω αποτελέσματα:
 
 Παρακάτω η εικόνα με θόρυβο Salt and Pepper μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε μια μέγαλη αλλαγή και φαίνεται σαν ένα κομμάτι του θορύβου να μην υπάρχει πια.
@@ -654,19 +663,61 @@ image::GaussianFilteredSP.jpg[]
 
 Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Mean Filter. Παρατηρούμε ότι σε σχέση με την εικόνα του θορύβου, υπάρχει μια σημαντική βελτίωση.
 
-.Poisson Shot noisy image, filtered using Mean Filter
+.Shot noisy image, filtered using Mean Filter
 image::MeanFilteredPoisson.jpg[]
 
 Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Median Filter. Στο μάτι τουλάχιστον φαίνεται το αποτέλεσμα να είναι χειρότερο από το αποτέλεσμα του φίλτρου Mean και επίσης όχι πολύ ικανοποιητικά.
 
-.Poisson Shot noisy image, filtered using Median Filter
+.Shot noisy image, filtered using Median Filter
 image::MedianFilteredPoisson.jpg[]
 
 Παρακάτω η εικόνα με θόρυβο Shot (Poisson) μετά την εξομάλυνση με χρήση Gaussian Blur. Τα αποτελέσματα φαίνονται καλύτερα σε σχέση με το Median σίγουρα αλλά όχι μεγάλη διαφορά σε σχέση με το Mean. Όπως και να έχει, δεν ήταν πολύ αποτελεσματική η εξομάλυνση.
 
-.Poisson Shot noisy image, filtered using Gauss Blur
+.Shot noisy image, filtered using Gauss Blur
 image::GaussianFilteredPoisson.jpg[]
 
 === Ερώτημα 6
 
-Στο παρακάτω ερώτημα γίνεται η σύγκριση της αρχικής εικόνας με το τελικό μας αποτέλεσμα κάθε φορά
+Στο παρακάτω ερώτημα γίνεται η σύγκριση της αρχικής εικόνας με το τελικό μας αποτέλεσμα κάθε φορά. Για τη σύγκριση χρησιμοποιούμε τη μετρική Structural Similarity Index Measure (SSIM) για το πρώτο υποερώτημα και Mean Square Error (MSE), του Μέσου Τετραγωνικού Σφάλματος δηλαδή για το δεύτερο.
+
+Η σύγκριση γίνεται στις παρακάτω γραμμές του κώδικα:
+
+[source, python]
+--
+# Print Similarity Scores
+sim_score = ssim(gray_image, meanFilterSP)
+mse_score = mean_squared_error(gray_image, meanFilterSP)
+print('Salt & Pepper: Original - Mean Filtered SSIM:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterSP)
+mse_score = mean_squared_error(gray_image, medianFilterSP)
+print('Salt & Pepper: Original - Median Filtered SSIM:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Median Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterSP)
+mse_score = mean_squared_error(gray_image, gaussianFilterSP)
+print('Salt & Pepper: Original - Gauss Filtered SSIM:{:.3f}'.format(sim_score))
+print('Salt & Pepper: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
+
+sim_score = ssim(gray_image, meanFilterPoisson)
+mse_score = mean_squared_error(gray_image, meanFilterPoisson)
+print('Shot: Original - Mean Filtered SSIM:{:.3f}'.format(sim_score))
+print('Shot: Original - Mean Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, medianFilterPoisson)
+mse_score = mean_squared_error(gray_image, medianFilterPoisson)
+print('Shot: Original - Median Filtered SSIM:{:.3f}'.format(sim_score))
+print('Shot: Original - Median Filtered MSE:{:.3f}'.format(mse_score))
+sim_score = ssim(gray_image, gaussianFilterPoisson)
+mse_score = mean_squared_error(gray_image, gaussianFilterPoisson)
+print('Shot: Original - Gauss Filtered SSIM:{:.3f}'.format(sim_score))
+print('Shot: Original - Gauss Filtered MSE:{:.3f}'.format(mse_score))
+--
+
+Για τη σύγκριση με τη μετρική SSIM, χρησιμοποιούμε τη συνάρτηση https://scikit-image.org/[ssim] της https://scikit-image.org/[scikit-image].
+Για τη σύγκριση με μέσο τετραγωνικό σφάλμα, χρησιμοποιούμε τη https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html[mean_squared_error] της ίδιας βιβλιοθήκης.
+
+Δημιουργούμε δυο μεταβλητές, sim_score και mse_score. Για κάθε εικόνα συνολικά, καλούμε και τις δύο συναρτήσεις με ορίσματα την αρχική και την ίδια την τελική εικόνα, μετά τον θόρυβο και την εξομάλυνση.
+Μετά από κάθε εκτέλεση, τυπώνουμε στο terminal τα αποτελέσματα με τη χρήση της print. Καλούμε τις ίδιες συναρτήσεις για όλες τις εικόνες, αποθηκεύοντας την τιμή στις ίδιες μεταβλητές.
+
+Παρακάτω τα αποτελέσματα που λάβαμε κατά την εκτέλεση του κώδικα:
+
+
